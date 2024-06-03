@@ -24,12 +24,28 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is an REST API I build on [Nest.js](https://github.com/nestjs/nest) framework for learning purposes. It has CRUD functionalities, file uploading feature, storing files on AWS s3 storage, as well as some basic authorisation with  with passport-local
 
 ## Installation
 
 ```bash
 $ npm install
+```
+
+### .env file setup 
+In order to run app you are required to setup .env file with your local variables:
+```bash
+DATABASE_HOST
+DATABASE_PORT
+DATABASE_USER
+DATABASE_PASSWORD
+DATABASE_NAME
+```
+
+### Run migrations
+
+```bash
+$ npm run migration:run
 ```
 
 ## Running the app
@@ -44,30 +60,3 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
