@@ -14,12 +14,14 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+import { FileInterceptor} from '@nestjs/platform-express';
+import { diskStorage, memoryStorage } from 'multer';
 import { extname } from 'path';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { ImageUploadDto } from './dto/ImageUploadDto';
 import { Image } from './entities/image.entity';
+import { Roles, ROLE_ADMIN, ROLE_USER } from 'src/auth/decorators/roles.decorator';
+import { MulterConfig } from 'src/config/multer.config';
 
 @ApiTags('images')
 @Controller('images')
@@ -47,49 +49,42 @@ export class ImagesController {
     },
   })
   @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads/images',
-        filename: (req, image, callback) => {
-          const uniqSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const extName = extname(image.originalname);
-          callback(null, uniqSuffix + extName);
-        },
-      }),
-    }),
+    FileInterceptor('file',  {storage: memoryStorage()}),
   )
   async uploadImage(
     @Body() imageUploadDto: ImageUploadDto,
     @UploadedFile(
-      new ParseFilePipeBuilder().addFileTypeValidator({fileType: "jpeg"}).build({
+      new ParseFilePipeBuilder().addFileTypeValidator({ fileType: "jpeg" }).build({
         errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY
       })
     ) file: Express.Multer.File,
   ) {
-    console.log(file)
     return this.imagesService.uploadImage(file, imageUploadDto);
   }
 
   @Get(":id")
-  @Header("Content-Type","image/jpeg")
-   async getImage(
+  @Roles([ROLE_ADMIN, ROLE_USER])
+  async getImage(
     @Param("id") id: string
-  ) : Promise<StreamableFile>{
+  ): Promise<Image> {
     return this.imagesService.findOne(+id);
   }
   @Get()
-   async getImages() : Promise<Image[]>{
+  @Roles([ROLE_ADMIN, ROLE_USER])
+  async getImages(): Promise<Image[]> {
     return this.imagesService.findAllRecords();
   }
-  
+
   @Delete(":id")
-  async removeOne(@Param("id") id: string){
+  @Roles([ROLE_ADMIN])
+  async removeOne(@Param("id") id: string) {
     return this.imagesService.removeImage(+id);
   }
   @Delete()
-  async removeAll(){
+  @Roles([ROLE_ADMIN])
+  async removeAll() {
     return this.imagesService.removeAllImages();
   }
 
-  
+
 }

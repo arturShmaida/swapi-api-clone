@@ -15,6 +15,6 @@ export abstract class BaseImageEntity {
   @UpdateDateColumn()
   edited: string;
 
-  @Column()
+  @Column( {nullable: true})
   url: string;
 }

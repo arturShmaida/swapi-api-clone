@@ -1,7 +1,7 @@
-import { Injectable, InternalServerErrorException, NotFoundException, StreamableFile } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Image } from './entities/image.entity';
-import { FindOneOptions, FindOptionsWhere, Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { ImageUploadDto } from './dto/ImageUploadDto';
 import { Film } from 'src/films/entities/film.entity';
 import { People } from 'src/people/entities/people.entity';
@@ -9,16 +9,12 @@ import { Planet } from 'src/planets/entities/planet.entity';
 import { Species } from 'src/species/entities/species.entity';
 import { Starship } from 'src/starships/entities/starship.entity';
 import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
-import { EntityTypeUnion, RepositoryTypeUnion, TypeKeys } from 'src/utils/constants';
-import { createReadStream } from 'fs';
-import { join } from 'path';
-const fs = require('fs').promises;
+import { EntityTypeUnion, TypeKeys } from 'src/utils/constants';
+import { StorageService } from 'src/storage/storage.service';
+import { getUniqueName } from 'src/utils/utils';
 
 @Injectable()
 export class ImagesService {
-
-
-
 
   constructor(
     @InjectRepository(Image)
@@ -40,6 +36,7 @@ export class ImagesService {
 
     @InjectRepository(Starship)
     private starshipRepository: Repository<Starship>,
+    private storageService: StorageService
   ) { }
 
   async uploadImage(image: Express.Multer.File, imageUploadDto: ImageUploadDto) {
@@ -55,28 +52,39 @@ export class ImagesService {
     } else {
       newImageId = lastImageArray[0].id + 1;
     }
+    console.log(image)
+    const uniqueName = getUniqueName(image);
 
-    imageEntity.name = image.filename;
+    imageEntity.name = uniqueName;
     imageEntity.id = newImageId;
-    imageEntity.url = 'localhost:3000/images/' + newImageId;
-
-    let linkedImageEntity = await this.linkImageToEntity(assignToEntity, entityId, imageEntity);
     
-    return await this.imageRepository.save(linkedImageEntity);
+    try {
+      let linkedImageEntity = await this.linkImageToEntity(assignToEntity, entityId, imageEntity);
+      let sendFileResponse = await this.storageService.sendFile(image, uniqueName);
+      console.log(sendFileResponse);
+      return await this.imageRepository.save(linkedImageEntity);
+    } catch (e: any) {
+      console.log(e);
+    }
+
   }
 
   async findAllRecords(): Promise<Image[]> {
-    return await this.imageRepository.find();
+
+    const imageEntities = await this.imageRepository.find();
+    if (imageEntities.length === 0) { return [] }
+    return this.storageService.getEnitiesWithSignedUrl(imageEntities);
   }
-  async findOne(id: number): Promise<StreamableFile> {
+
+
+  async findOne(id: number): Promise<Image> {
     const imageEntity = await this.imageRepository.findOneBy({ id })
     if (!imageEntity) {
       throw new NotFoundException(`Image with id: ${id} is Not Found!`);
     }
-    const imageName = imageEntity.name;
-    const pathToImage = join(process.cwd(), "uploads/images/", imageName)
-    const imageFile = createReadStream(pathToImage)
-    return new StreamableFile(imageFile);
+
+    let entity = (await this.storageService.getEnitiesWithSignedUrl([imageEntity]))[0]
+    return entity;
   }
 
   async removeImage(id: number) {
@@ -85,22 +93,23 @@ export class ImagesService {
       throw new NotFoundException(`Image with id: ${id} is Not Found!`);
     }
     const imageName = imageEntity.name;
-    const pathToImage = join(process.cwd(), "uploads/images/", imageName)
+    
+    let success = await this.storageService.removeFile(imageName);
 
-    try {
-      await fs.unlink(pathToImage);
-      return await this.imageRepository.remove(imageEntity);
-    } catch (error) {
-      console.log(error)
-    }
+    if(success) {
+      return this.imageRepository.remove(imageEntity);
+    } 
+    
+    throw new InternalServerErrorException("Unexpected error while removinge image"); 
   }
+
   async removeAllImages() {
     try {
       let allImages = await this.findAllRecords();
       for (let image of allImages) {
         await this.removeImage(image.id);
       }
-      return {success: true}
+      return { success: true }
     } catch (error) {
       console.log(error)
       throw new InternalServerErrorException("Unexpected error while removing all images");
@@ -152,3 +161,5 @@ export class ImagesService {
 
 
 }
+
+

@@ -14,6 +14,12 @@ import { StarshipsModule } from './starships/starships.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppConfig, DatabaseConfig } from './config';
 import { CommonModule } from './common/common.module';
+import { HttpExceptionFilter } from './common/exception-filters/http-exception.filter';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { RolesGuard } from './auth/guards/roles.guard';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
@@ -23,11 +29,11 @@ import { CommonModule } from './common/common.module';
       load: [AppConfig, DatabaseConfig],
     }),
     TypeOrmModule.forRootAsync({
-      imports:[ConfigModule],
-      useFactory: (configService: ConfigService)=>({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
         ...configService.get("database")
       }),
-      inject:[ConfigService]
+      inject: [ConfigService]
     }),
     MulterModule.register({ dest: './uploads/images' }),
     PeopleModule,
@@ -38,10 +44,25 @@ import { CommonModule } from './common/common.module';
     VehiclesModule,
     StarshipsModule,
     CommonModule,
+    AuthModule,
+    UserModule,
+    StorageModule,
   ],
   controllers: [AppController],
   providers: [
-    AppService
+    AppService,
+    {
+      provide: "APP_FILTER",
+      useClass: HttpExceptionFilter
+    },
+    // {
+    //   provide: "APP_GUARD",
+    //   useClass: AuthGuard
+    // },
+    // {
+    //   provide:"APP_GUARD",
+    //   useClass: RolesGuard
+    // }
   ],
 })
-export class AppModule {}
+export class AppModule { }

@@ -9,6 +9,7 @@ import { Planet } from 'src/planets/entities/planet.entity';
 import { Species } from 'src/species/entities/species.entity';
 import { Starship } from 'src/starships/entities/starship.entity';
 import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
+import { StorageModule } from 'src/storage/storage.module';
 
 @Module({
   imports: [
@@ -20,7 +21,9 @@ import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
       Starship,
       Vehicle,
       Image,
-    ]),],
+    ]),
+    StorageModule
+  ],
   controllers: [ImagesController],
   providers: [ImagesService],
 })

@@ -7,6 +7,7 @@ import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
 import { Repository } from 'typeorm';
 
 export const DEFAULT_PAGE_LIMIT = 10;
+export const IMAGE_URL_TIME_TO_LIVE = 3600;
 export enum entities {
   people = 'people',
   films = 'films',
