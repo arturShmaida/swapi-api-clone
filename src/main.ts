@@ -5,7 +5,7 @@ import { ResponseInterceptor } from './common/intrceptors/response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalInterceptors(new ResponseInterceptor())
+  app.useGlobalInterceptors(new ResponseInterceptor());
   const config = new DocumentBuilder()
     .setTitle('Documentation')
     .setDescription('Api that mirrors Star Wars API')

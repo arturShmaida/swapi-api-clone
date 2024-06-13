@@ -3,30 +3,29 @@ import {
   Controller,
   Delete,
   Get,
-  Header,
   HttpStatus,
   Param,
   ParseFilePipeBuilder,
   Post,
-  StreamableFile,
   UploadedFile,
-  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
-import { FileInterceptor} from '@nestjs/platform-express';
-import { diskStorage, memoryStorage } from 'multer';
-import { extname } from 'path';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { ImageUploadDto } from './dto/ImageUploadDto';
 import { Image } from './entities/image.entity';
-import { Roles, ROLE_ADMIN, ROLE_USER } from 'src/auth/decorators/roles.decorator';
-import { MulterConfig } from 'src/config/multer.config';
+import {
+  Roles,
+  ROLE_ADMIN,
+  ROLE_USER,
+} from 'src/auth/decorators/roles.decorator';
 
 @ApiTags('images')
 @Controller('images')
 export class ImagesController {
-  constructor(private readonly imagesService: ImagesService) { }
+  constructor(private readonly imagesService: ImagesService) {}
 
   @Post('/upload')
   @ApiConsumes('multipart/form-data')
@@ -42,31 +41,36 @@ export class ImagesController {
           type: 'number',
         },
         assignToEntity: {
-
-          enum: ['people', 'films', 'planets', 'species', 'starships', 'vehicles']
+          enum: [
+            'people',
+            'films',
+            'planets',
+            'species',
+            'starships',
+            'vehicles',
+          ],
         },
       },
     },
   })
-  @UseInterceptors(
-    FileInterceptor('file',  {storage: memoryStorage()}),
-  )
+  @UseInterceptors(FileInterceptor('file', { storage: memoryStorage() }))
   async uploadImage(
     @Body() imageUploadDto: ImageUploadDto,
     @UploadedFile(
-      new ParseFilePipeBuilder().addFileTypeValidator({ fileType: "jpeg" }).build({
-        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY
-      })
-    ) file: Express.Multer.File,
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({ fileType: 'jpeg' })
+        .build({
+          errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+        }),
+    )
+    file: Express.Multer.File,
   ) {
     return this.imagesService.uploadImage(file, imageUploadDto);
   }
 
-  @Get(":id")
+  @Get(':id')
   @Roles([ROLE_ADMIN, ROLE_USER])
-  async getImage(
-    @Param("id") id: string
-  ): Promise<Image> {
+  async getImage(@Param('id') id: string): Promise<Image> {
     return this.imagesService.findOne(+id);
   }
   @Get()
@@ -75,9 +79,9 @@ export class ImagesController {
     return this.imagesService.findAllRecords();
   }
 
-  @Delete(":id")
+  @Delete(':id')
   @Roles([ROLE_ADMIN])
-  async removeOne(@Param("id") id: string) {
+  async removeOne(@Param('id') id: string) {
     return this.imagesService.removeImage(+id);
   }
   @Delete()
@@ -85,6 +89,4 @@ export class ImagesController {
   async removeAll() {
     return this.imagesService.removeAllImages();
   }
-
-
 }

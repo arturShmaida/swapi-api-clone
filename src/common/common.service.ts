@@ -1,16 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Film } from 'src/films/entities/film.entity';
-import { People } from 'src/people/entities/people.entity';
-import { Planet } from 'src/planets/entities/planet.entity';
+import { Film } from 'src/swapi/films/entities/film.entity';
+import { People } from 'src/swapi/people/entities/people.entity';
+import { Planet } from 'src/swapi/planets/entities/planet.entity';
 import {
   TypeKeys as EntityTypeOptions,
   EntityTypeUnion,
   RepositoryTypeUnion,
 } from 'src/utils/constants';
-import { Species } from 'src/species/entities/species.entity';
-import { Starship } from 'src/starships/entities/starship.entity';
-import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
+import { Species } from 'src/swapi/species/entities/species.entity';
+import { Starship } from 'src/swapi/starships/entities/starship.entity';
+import { Vehicle } from 'src/swapi/vehicles/entities/vehicle.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -33,21 +33,19 @@ export class CommonService {
 
     @InjectRepository(Starship)
     private starshipRepository: Repository<Starship>,
-  ) { }
+  ) {}
 
   async createNewEntityWithDto(
     entityDto: object,
     entityType: EntityTypeOptions,
   ): Promise<EntityTypeUnion> {
-    console.log("Common module fires")
-    console.log("Dto entity:")
-    console.log(entityDto)
+    console.log('Common module fires');
+    console.log('Dto entity:');
+    console.log(entityDto);
     let repository: RepositoryTypeUnion =
       this.assignRepositoryByPropertyKey(entityType);
 
     const newEntity: EntityTypeUnion = repository.create();
-     
-    
 
     for (const propertyKey of Object.keys(entityDto)) {
       repository = this.assignRepositoryByPropertyKey(propertyKey);
@@ -59,8 +57,10 @@ export class CommonService {
             const tempEntity = await repository.findOneBy({ id: entityId });
 
             if (tempEntity === null) {
-              console.log(`No entity of ${propertyKey} with id: ${entityId}`)
-              throw new NotFoundException(`Related entity with id: ${entityId} is Not Found!`);
+              console.log(`No entity of ${propertyKey} with id: ${entityId}`);
+              throw new NotFoundException(
+                `Related entity with id: ${entityId} is Not Found!`,
+              );
             }
             newEntity[propertyKey].push(tempEntity);
           }
@@ -78,16 +78,18 @@ export class CommonService {
           id: entityId,
         });
         if (tempEntity === null) {
-          console.log(`No entity of ${propertyKey} with id: ${entityId}`)
+          console.log(`No entity of ${propertyKey} with id: ${entityId}`);
 
-          throw new NotFoundException(`Related entity with id: ${entityId} is Not Found!`);
+          throw new NotFoundException(
+            `Related entity with id: ${entityId} is Not Found!`,
+          );
         }
         newEntity[propertyKey] = tempEntity;
       } else {
         newEntity[propertyKey] = entityDto[propertyKey];
       }
     }
-    console.log(newEntity)
+    console.log(newEntity);
     return newEntity;
   }
 

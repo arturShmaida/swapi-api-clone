@@ -3,12 +3,12 @@ import { ImagesService } from './images.service';
 import { ImagesController } from './images.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Image } from './entities/image.entity';
-import { People } from 'src/people/entities/people.entity';
-import { Film } from 'src/films/entities/film.entity';
-import { Planet } from 'src/planets/entities/planet.entity';
-import { Species } from 'src/species/entities/species.entity';
-import { Starship } from 'src/starships/entities/starship.entity';
-import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
+import { People } from 'src/swapi/people/entities/people.entity';
+import { Film } from 'src/swapi/films/entities/film.entity';
+import { Planet } from 'src/swapi/planets/entities/planet.entity';
+import { Species } from 'src/swapi/species/entities/species.entity';
+import { Starship } from 'src/swapi/starships/entities/starship.entity';
+import { Vehicle } from 'src/swapi/vehicles/entities/vehicle.entity';
 import { StorageModule } from 'src/storage/storage.module';
 
 @Module({
@@ -22,9 +22,9 @@ import { StorageModule } from 'src/storage/storage.module';
       Vehicle,
       Image,
     ]),
-    StorageModule
+    StorageModule,
   ],
   controllers: [ImagesController],
   providers: [ImagesService],
 })
-export class ImagesModule { }
+export class ImagesModule {}
