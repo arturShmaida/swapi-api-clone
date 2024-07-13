@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { TypeKeys, entities } from 'src/utils/constants';
+import { TypeKeys } from '../../utils/constants';
 
 export class ImageUploadDto {
   @ApiProperty()

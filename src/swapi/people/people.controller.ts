@@ -17,7 +17,7 @@ import {
   ROLE_ADMIN,
   ROLE_USER,
   Roles,
-} from 'src/auth/decorators/roles.decorator';
+} from '../../auth/decorators/roles.decorator';
 
 @ApiTags('people')
 @Controller('people')

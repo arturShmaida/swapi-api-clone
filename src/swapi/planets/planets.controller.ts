@@ -13,12 +13,12 @@ import { PlanetsService } from './planets.service';
 import { CreatePlanetDto } from './dto/create-planet.dto';
 import { UpdatePlanetDto } from './dto/update-planet.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { PaginationDto } from '../../common/dto/pagination.dto';
 import {
   Roles,
   ROLE_ADMIN,
   ROLE_USER,
-} from 'src/auth/decorators/roles.decorator';
+} from '../../auth/decorators/roles.decorator';
 
 @ApiTags('planets')
 @Controller('planets')

@@ -1,6 +1,6 @@
-import { BaseEntity } from 'src/common/entities/base.entity';
+import { BaseEntity } from '../../../common/entities/base.entity';
 import { Film } from '../../films/entities/film.entity';
-import { Image } from 'src/images/entities/image.entity';
+import { Image } from '../../../images/entities/image.entity';
 import { Planet } from '../../planets/entities/planet.entity';
 import { Species } from '../../species/entities/species.entity';
 import { Starship } from '../../starships/entities/starship.entity';

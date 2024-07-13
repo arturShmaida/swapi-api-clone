@@ -4,10 +4,10 @@ import { UpdateFilmDto } from './dto/update-film.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Film } from './entities/film.entity';
 import { Repository } from 'typeorm';
-import { CommonService } from 'src/common/common.service';
-import { DEFAULT_PAGE_LIMIT, TypeKeys } from 'src/utils/constants';
-import { getEntityUrl } from 'src/utils/utils';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { CommonService } from '../../common/common.service';
+import { DEFAULT_PAGE_LIMIT, TypeKeys } from '../../utils/constants';
+import { getEntityUrl } from '../../utils/utils';
+import { PaginationDto } from '../../common/dto/pagination.dto';
 
 @Injectable()
 export class FilmsService {

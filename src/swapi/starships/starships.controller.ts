@@ -13,12 +13,12 @@ import { StarshipsService } from './starships.service';
 import { CreateStarshipDto } from './dto/create-starship.dto';
 import { UpdateStarshipDto } from './dto/update-starship.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { PaginationDto } from '../../common/dto/pagination.dto';
 import {
   ROLE_ADMIN,
   ROLE_USER,
   Roles,
-} from 'src/auth/decorators/roles.decorator';
+} from '../../auth/decorators/roles.decorator';
 
 @ApiTags('starships')
 @Controller('starships')

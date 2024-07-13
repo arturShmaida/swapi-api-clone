@@ -13,12 +13,12 @@ import { VehiclesService } from './vehicles.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { PaginationDto } from '../../common/dto/pagination.dto';
 import {
   Roles,
   ROLE_ADMIN,
   ROLE_USER,
-} from 'src/auth/decorators/roles.decorator';
+} from '../../auth/decorators/roles.decorator';
 
 @ApiTags('vehicles')
 @Controller('vehicles')

@@ -2,12 +2,12 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStarshipDto } from './dto/create-starship.dto';
 import { UpdateStarshipDto } from './dto/update-starship.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CommonService } from 'src/common/common.service';
+import { CommonService } from '../../common/common.service';
 import { Repository } from 'typeorm';
-import { DEFAULT_PAGE_LIMIT, TypeKeys } from 'src/utils/constants';
-import { getEntityUrl } from 'src/utils/utils';
+import { DEFAULT_PAGE_LIMIT, TypeKeys } from '../../utils/constants';
+import { getEntityUrl } from '../../utils/utils';
 import { Starship } from './entities/starship.entity';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { PaginationDto } from '../../common/dto/pagination.dto';
 
 @Injectable()
 export class StarshipsService {

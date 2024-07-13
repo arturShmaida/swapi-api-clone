@@ -3,11 +3,11 @@ import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { Vehicle } from './entities/vehicle.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CommonService } from 'src/common/common.service';
+import { CommonService } from '../../common/common.service';
 import { Repository } from 'typeorm';
-import { DEFAULT_PAGE_LIMIT, TypeKeys } from 'src/utils/constants';
-import { getEntityUrl } from 'src/utils/utils';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { DEFAULT_PAGE_LIMIT, TypeKeys } from '../../utils/constants';
+import { getEntityUrl } from '../../utils/utils';
+import { PaginationDto } from '../../common/dto/pagination.dto';
 
 @Injectable()
 export class VehiclesService {

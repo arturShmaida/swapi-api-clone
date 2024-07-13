@@ -10,8 +10,8 @@ import {
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { ConfigService } from '@nestjs/config';
-import { Image } from 'src/images/entities/image.entity';
-import { IMAGE_URL_TIME_TO_LIVE } from 'src/utils/constants';
+import { Image } from '../images/entities/image.entity';
+import { IMAGE_URL_TIME_TO_LIVE } from '../utils/constants';
 
 @Injectable()
 export class StorageService {

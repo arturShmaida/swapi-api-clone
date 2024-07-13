@@ -1,7 +1,7 @@
-import { BaseEntity } from 'src/common/entities/base.entity';
+import { BaseEntity } from '../../../common/entities/base.entity';
 import { Film } from '../../films/entities/film.entity';
 import { People } from '../../people/entities/people.entity';
-import { Image } from 'src/images/entities/image.entity';
+import { Image } from '../../../images/entities/image.entity';
 import { Entity, Column, OneToMany, ManyToMany } from 'typeorm';
 
 @Entity()

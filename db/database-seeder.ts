@@ -1,12 +1,12 @@
 import { InjectDataSource } from "@nestjs/typeorm";
-import { Film } from "src/swapi/films/entities/film.entity";
-import { People } from "src/swapi/people/entities/people.entity";
-import { Planet } from "src/swapi/planets/entities/planet.entity";
-import { Species } from "src/swapi/species/entities/species.entity";
-import { Starship } from "src/swapi/starships/entities/starship.entity";
-import { entities, RepositoryTypeUnion, EntityTypeUnion, SWAPI_FETCH_URL } from "src/utils/constants";
-import { getEntityUrl } from "src/utils/utils";
-import { Vehicle } from "src/swapi/vehicles/entities/vehicle.entity";
+import { Film } from "../src/swapi/films/entities/film.entity";
+import { People } from "../src/swapi/people/entities/people.entity";
+import { Planet } from "../src/swapi/planets/entities/planet.entity";
+import { Species } from "../src/swapi/species/entities/species.entity";
+import { Starship } from "../src/swapi/starships/entities/starship.entity";
+import { Vehicle } from "../src/swapi/vehicles/entities/vehicle.entity";
+import { entities, RepositoryTypeUnion, EntityTypeUnion, SWAPI_FETCH_URL } from "../src/utils/constants";
+import { getEntityUrl } from "../src/utils/utils";
 import { QueryRunner } from "typeorm";
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Roles, RolesEnum } from 'src/auth/decorators/roles.decorator';
+import { RolesEnum } from '../auth/decorators/roles.decorator';
 
 interface User {
   userId: number;

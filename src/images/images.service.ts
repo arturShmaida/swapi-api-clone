@@ -7,15 +7,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Image } from './entities/image.entity';
 import { FindOneOptions, Repository } from 'typeorm';
 import { ImageUploadDto } from './dto/ImageUploadDto';
-import { Film } from 'src/swapi/films/entities/film.entity';
-import { People } from 'src/swapi/people/entities/people.entity';
-import { Planet } from 'src/swapi/planets/entities/planet.entity';
-import { Species } from 'src/swapi/species/entities/species.entity';
-import { Starship } from 'src/swapi/starships/entities/starship.entity';
-import { Vehicle } from 'src/swapi/vehicles/entities/vehicle.entity';
-import { EntityTypeUnion, TypeKeys } from 'src/utils/constants';
-import { StorageService } from 'src/storage/storage.service';
-import { getUniqueName } from 'src/utils/utils';
+import { Film } from '../swapi/films/entities/film.entity';
+import { People } from '../swapi/people/entities/people.entity';
+import { Planet } from '../swapi/planets/entities/planet.entity';
+import { Species } from '../swapi/species/entities/species.entity';
+import { Starship } from '../swapi/starships/entities/starship.entity';
+import { Vehicle } from '../swapi/vehicles/entities/vehicle.entity';
+import { EntityTypeUnion, TypeKeys } from '../utils/constants';
+import { StorageService } from '../storage/storage.service';
+import { getUniqueName } from '../utils/utils';
 
 @Injectable()
 export class ImagesService {

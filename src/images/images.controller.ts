@@ -20,7 +20,7 @@ import {
   Roles,
   ROLE_ADMIN,
   ROLE_USER,
-} from 'src/auth/decorators/roles.decorator';
+} from '../auth/decorators/roles.decorator';
 
 @ApiTags('images')
 @Controller('images')

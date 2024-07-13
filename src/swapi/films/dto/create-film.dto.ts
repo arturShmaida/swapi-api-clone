@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsString,
-  IsNumberString,
-  IsOptional,
-  IsArray,
-  IsUrl,
-} from 'class-validator';
+import { IsString, IsNumberString, IsArray } from 'class-validator';
 
 export class CreateFilmDto {
   @ApiProperty()

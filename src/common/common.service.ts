@@ -1,16 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Film } from 'src/swapi/films/entities/film.entity';
-import { People } from 'src/swapi/people/entities/people.entity';
-import { Planet } from 'src/swapi/planets/entities/planet.entity';
+import { Film } from '../swapi/films/entities/film.entity';
+import { People } from '../swapi/people/entities/people.entity';
+import { Planet } from '../swapi/planets/entities/planet.entity';
 import {
   TypeKeys as EntityTypeOptions,
   EntityTypeUnion,
   RepositoryTypeUnion,
 } from 'src/utils/constants';
-import { Species } from 'src/swapi/species/entities/species.entity';
-import { Starship } from 'src/swapi/starships/entities/starship.entity';
-import { Vehicle } from 'src/swapi/vehicles/entities/vehicle.entity';
+import { Species } from '../swapi/species/entities/species.entity';
+import { Starship } from '../swapi/starships/entities/starship.entity';
+import { Vehicle } from '../swapi/vehicles/entities/vehicle.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -39,9 +39,6 @@ export class CommonService {
     entityDto: object,
     entityType: EntityTypeOptions,
   ): Promise<EntityTypeUnion> {
-    console.log('Common module fires');
-    console.log('Dto entity:');
-    console.log(entityDto);
     let repository: RepositoryTypeUnion =
       this.assignRepositoryByPropertyKey(entityType);
 

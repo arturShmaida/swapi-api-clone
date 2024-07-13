@@ -7,9 +7,9 @@ import { UpdatePeopleDto } from './dto/update-person.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { People } from './entities/people.entity';
 import { Repository } from 'typeorm';
-import { TypeKeys } from 'src/utils/constants';
-import { CommonService } from 'src/common/common.service';
-import { getEntityUrl } from 'src/utils/utils';
+import { TypeKeys } from '../../utils/constants';
+import { CommonService } from '../../common/common.service';
+import { getEntityUrl } from '../../utils/utils';
 
 @Injectable()
 export class PeopleService {
