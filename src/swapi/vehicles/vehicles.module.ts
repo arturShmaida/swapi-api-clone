@@ -5,17 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from '../../common/common.module';
 
 import { Vehicle } from './entities/vehicle.entity';
-import { CommonService } from '../../common/common.service';
 import { Image } from '../../images/entities/image.entity';
 
 @Module({
-  imports: [
-    CommonModule,
-    TypeOrmModule.forFeature([
-      Vehicle,
-      Image,
-    ]),
-  ],
+  imports: [CommonModule, TypeOrmModule.forFeature([Vehicle, Image])],
   controllers: [VehiclesController],
   providers: [VehiclesService],
 })
