@@ -17,7 +17,7 @@ import { IMAGE_URL_TIME_TO_LIVE } from '../utils/constants';
 export class StorageService {
   constructor(private configService: ConfigService) {}
 
-  S3ClientFactory() {
+  private S3ClientFactory() {
     const bucketRegion = this.configService.get('BUCKET_REGION');
     const bucketAccessKey = this.configService.get('BUCKET_ACCESS_KEY');
     const bucketSecretKey = this.configService.get('BUCKET_SECRET_KEY');

@@ -2,35 +2,31 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { VehiclesController } from './vehicles.controller';
 import { VehiclesService } from './vehicles.service';
 import { Vehicle } from './entities/vehicle.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CommonModule } from '../../common/common.module';
-import { dataSourceMock } from '../../../db/data-source';
-import { Image } from '../../images/entities/image.entity';
-import { DataSource } from 'typeorm';
-import { AppModule } from '../../app.module';
-import { forwardRef } from '@nestjs/common';
+
+import { CommonService } from '../../common/common.service';
+import { repositoryMockupsFactory } from '../../test/repository.mock';
+import { Film } from '../films/entities/film.entity';
+import { People } from '../people/entities/people.entity';
+import { Planet } from '../planets/entities/planet.entity';
+import { Species } from '../species/entities/species.entity';
+import { Starship } from '../starships/entities/starship.entity';
 
 describe('VehiclesController', () => {
   let controller: VehiclesController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        CommonModule,
-        forwardRef(() => AppModule),
-        TypeOrmModule.forFeature([Vehicle, Image], dataSourceMock),
-      ],
+     
       controllers: [VehiclesController],
       providers: [
         VehiclesService,
-        {
-          provide: DataSource,
-          useFactory: () => {
-            return {
-              DataSource: jest.fn().mockImplementation(() => DataSource),
-            };
-          },
-        },
+        CommonService,
+        repositoryMockupsFactory(People),
+        repositoryMockupsFactory(Film),
+        repositoryMockupsFactory(Starship),
+        repositoryMockupsFactory(Species),
+        repositoryMockupsFactory(Vehicle),
+        repositoryMockupsFactory(Planet)
       ],
     }).compile();
 

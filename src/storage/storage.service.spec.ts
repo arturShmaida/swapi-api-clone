@@ -1,15 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { StorageService } from './storage.service';
-import { forwardRef } from '@nestjs/common';
-import { AppModule } from '../app.module';
+import { ConfigService } from '@nestjs/config';
 
 describe('StorageService', () => {
   let service: StorageService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [forwardRef(() => AppModule)],
-      providers: [StorageService],
+
+      providers: [
+        StorageService,
+        {
+          provide: ConfigService,
+          useValue: {
+            get: jest.fn()
+          }
+        }
+      ],
     }).compile();
 
     service = module.get<StorageService>(StorageService);
