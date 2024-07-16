@@ -16,7 +16,6 @@ describe('VehiclesController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-     
       controllers: [VehiclesController],
       providers: [
         VehiclesService,
@@ -26,7 +25,7 @@ describe('VehiclesController', () => {
         repositoryMockupsFactory(Starship),
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
-        repositoryMockupsFactory(Planet)
+        repositoryMockupsFactory(Planet),
       ],
     }).compile();
 

@@ -1,14 +1,13 @@
-import { getRepositoryToken } from "@nestjs/typeorm";
-import { Film } from "../swapi/films/entities/film.entity";
-import { People } from "../swapi/people/entities/people.entity";
-import { Planet } from "../swapi/planets/entities/planet.entity";
-import { Species } from "../swapi/species/entities/species.entity";
-import { Starship } from "../swapi/starships/entities/starship.entity";
-import { Vehicle } from "../swapi/vehicles/entities/vehicle.entity";
-import { EntityClassOrSchema } from "@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type";
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Film } from '../swapi/films/entities/film.entity';
+import { People } from '../swapi/people/entities/people.entity';
+import { Planet } from '../swapi/planets/entities/planet.entity';
+import { Species } from '../swapi/species/entities/species.entity';
+import { Starship } from '../swapi/starships/entities/starship.entity';
+import { Vehicle } from '../swapi/vehicles/entities/vehicle.entity';
+import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type';
 
 export const repositoryMockups = {
-
   people: {
     provide: getRepositoryToken(People),
     useValue: {
@@ -16,8 +15,8 @@ export const repositoryMockups = {
       find: jest.fn(),
       remove: jest.fn(),
       create: jest.fn(),
-      save: jest.fn()
-    }
+      save: jest.fn(),
+    },
   },
   films: {
     provide: getRepositoryToken(Film),
@@ -26,8 +25,8 @@ export const repositoryMockups = {
       find: jest.fn(),
       remove: jest.fn(),
       create: jest.fn(),
-      save: jest.fn()
-    }
+      save: jest.fn(),
+    },
   },
   planets: {
     provide: getRepositoryToken(Planet),
@@ -36,8 +35,8 @@ export const repositoryMockups = {
       find: jest.fn(),
       remove: jest.fn(),
       create: jest.fn(),
-      save: jest.fn()
-    }
+      save: jest.fn(),
+    },
   },
   species: {
     provide: getRepositoryToken(Species),
@@ -46,16 +45,16 @@ export const repositoryMockups = {
       find: jest.fn(),
       remove: jest.fn(),
       create: jest.fn(),
-      save: jest.fn()
-    }
+      save: jest.fn(),
+    },
   },
   Starship: {
     provide: getRepositoryToken(Starship),
     useValue: {
       findOneBy: jest.fn(),
       create: jest.fn(),
-      save: jest.fn()
-    }
+      save: jest.fn(),
+    },
   },
   vehicle: {
     provide: getRepositoryToken(Vehicle),
@@ -64,11 +63,11 @@ export const repositoryMockups = {
       find: jest.fn(),
       remove: jest.fn(),
       create: jest.fn(),
-      save: jest.fn()
-    }
-  }
-}
-export const repositoryMockupsFactory = (entityClass:EntityClassOrSchema) => {
+      save: jest.fn(),
+    },
+  },
+};
+export const repositoryMockupsFactory = (entityClass: EntityClassOrSchema) => {
   return {
     provide: getRepositoryToken(entityClass),
     useValue: {
@@ -76,7 +75,7 @@ export const repositoryMockupsFactory = (entityClass:EntityClassOrSchema) => {
       find: jest.fn(),
       remove: jest.fn(),
       create: jest.fn(),
-      save: jest.fn()
-    }
-  }
-}
+      save: jest.fn(),
+    },
+  };
+};

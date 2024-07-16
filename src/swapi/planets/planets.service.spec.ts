@@ -22,7 +22,7 @@ describe('PlanetsService', () => {
         repositoryMockupsFactory(Starship),
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
-        repositoryMockupsFactory(Planet)
+        repositoryMockupsFactory(Planet),
       ],
     }).compile();
 

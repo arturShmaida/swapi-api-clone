@@ -14,7 +14,6 @@ describe('SpeciesService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-     
       providers: [
         SpeciesService,
         CommonService,
@@ -23,7 +22,8 @@ describe('SpeciesService', () => {
         repositoryMockupsFactory(Starship),
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
-        repositoryMockupsFactory(Planet)],
+        repositoryMockupsFactory(Planet),
+      ],
     }).compile();
 
     service = module.get<SpeciesService>(SpeciesService);

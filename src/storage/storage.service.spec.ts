@@ -7,15 +7,14 @@ describe('StorageService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-
       providers: [
         StorageService,
         {
           provide: ConfigService,
           useValue: {
-            get: jest.fn()
-          }
-        }
+            get: jest.fn(),
+          },
+        },
       ],
     }).compile();
 

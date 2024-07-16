@@ -1,11 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import PeopleController from './people.controller';
 import { PeopleService } from './people.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { People } from './entities/people.entity';
-import { CommonModule } from '../../common/common.module';
-import { forwardRef } from '@nestjs/common';
-import { AppModule } from '../../app.module';
 import { CommonService } from '../../common/common.service';
 import { repositoryMockupsFactory } from '../../test/repository.mock';
 import { Film } from '../films/entities/film.entity';
@@ -28,7 +24,7 @@ describe('PeopleController', () => {
         repositoryMockupsFactory(Starship),
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
-        repositoryMockupsFactory(Planet)
+        repositoryMockupsFactory(Planet),
       ],
     }).compile();
 

@@ -16,7 +16,6 @@ describe('ImagesController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-
       controllers: [ImagesController],
       providers: [
         ImagesService,
@@ -25,8 +24,8 @@ describe('ImagesController', () => {
           useValue: {
             sendFile: jest.fn(),
             getEntitiesWithSignedUrl: jest.fn(),
-            removeFile: jest.fn() 
-          }
+            removeFile: jest.fn(),
+          },
         },
         repositoryMockupsFactory(People),
         repositoryMockupsFactory(Film),
@@ -34,8 +33,7 @@ describe('ImagesController', () => {
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
         repositoryMockupsFactory(Planet),
-        repositoryMockupsFactory(Image)
-
+        repositoryMockupsFactory(Image),
       ],
     }).compile();
 

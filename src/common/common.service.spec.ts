@@ -13,7 +13,6 @@ describe('CommonService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      
       providers: [
         CommonService,
         repositoryMockupsFactory(People),
@@ -21,7 +20,8 @@ describe('CommonService', () => {
         repositoryMockupsFactory(Starship),
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
-        repositoryMockupsFactory(Planet)],
+        repositoryMockupsFactory(Planet),
+      ],
     }).compile();
 
     service = module.get<CommonService>(CommonService);

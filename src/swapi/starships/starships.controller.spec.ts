@@ -2,11 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { StarshipsController } from './starships.controller';
 import { StarshipsService } from './starships.service';
 import { Starship } from './entities/starship.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CommonModule } from '../../common/common.module';
-import { Image } from '../../images/entities/image.entity';
-import { forwardRef } from '@nestjs/common';
-import { AppModule } from '../../app.module';
 import { CommonService } from '../../common/common.service';
 import { repositoryMockupsFactory } from '../../test/repository.mock';
 import { Film } from '../films/entities/film.entity';
@@ -29,7 +24,7 @@ describe('StarshipsController', () => {
         repositoryMockupsFactory(Starship),
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
-        repositoryMockupsFactory(Planet)
+        repositoryMockupsFactory(Planet),
       ],
     }).compile();
 

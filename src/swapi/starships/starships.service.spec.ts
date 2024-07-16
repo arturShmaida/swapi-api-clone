@@ -1,10 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { StarshipsService } from './starships.service';
 import { Starship } from './entities/starship.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CommonModule } from '../../common/common.module';
-import { forwardRef } from '@nestjs/common';
-import { AppModule } from '../../app.module';
 import { CommonService } from '../../common/common.service';
 import { repositoryMockupsFactory } from '../../test/repository.mock';
 import { Film } from '../films/entities/film.entity';
@@ -18,7 +14,6 @@ describe('StarshipsService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-     
       providers: [
         StarshipsService,
         CommonService,
@@ -27,7 +22,7 @@ describe('StarshipsService', () => {
         repositoryMockupsFactory(Starship),
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
-        repositoryMockupsFactory(Planet)
+        repositoryMockupsFactory(Planet),
       ],
     }).compile();
 

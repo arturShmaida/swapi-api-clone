@@ -1,10 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FilmsService } from './films.service';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { Film } from './entities/film.entity';
-import { CommonModule } from '../../common/common.module';
 import { People } from '../people/entities/people.entity';
-import { repositoryMockups, repositoryMockupsFactory } from '../../test/repository.mock';
+import { repositoryMockupsFactory } from '../../test/repository.mock';
 
 import { CommonService } from '../../common/common.service';
 import { Planet } from '../planets/entities/planet.entity';
@@ -25,7 +23,7 @@ describe('FilmsService', () => {
         repositoryMockupsFactory(Starship),
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
-        repositoryMockupsFactory(Planet)
+        repositoryMockupsFactory(Planet),
       ],
     }).compile();
 

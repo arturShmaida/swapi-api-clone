@@ -22,8 +22,8 @@ describe('ImagesService', () => {
           useValue: {
             sendFile: jest.fn(),
             getEntitiesWithSignedUrl: jest.fn(),
-            removeFile: jest.fn() 
-          }
+            removeFile: jest.fn(),
+          },
         },
         repositoryMockupsFactory(People),
         repositoryMockupsFactory(Film),
@@ -31,7 +31,7 @@ describe('ImagesService', () => {
         repositoryMockupsFactory(Species),
         repositoryMockupsFactory(Vehicle),
         repositoryMockupsFactory(Planet),
-        repositoryMockupsFactory(Image)
+        repositoryMockupsFactory(Image),
       ],
     }).compile();
 
