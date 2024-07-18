@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
   ValidationPipe,
-  Query,
 } from '@nestjs/common';
 import { SpeciesService } from './species.service';
 import { CreateSpeciesDto } from './dto/create-species.dto';
@@ -26,7 +25,7 @@ export class SpeciesController {
   }
 
   @Get()
-  async findAll(@Query() paginationDto: PaginationDto) {
+  async findAll(@Param() paginationDto: PaginationDto) {
     return this.speciesService.findAll(paginationDto);
   }
 

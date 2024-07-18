@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
+
   ValidationPipe,
 } from '@nestjs/common';
 import { PlanetsService } from './planets.service';
@@ -33,7 +33,7 @@ export class PlanetsController {
 
   @Get()
   @Roles([ROLE_ADMIN, ROLE_USER])
-  findAll(@Query() paginationDto: PaginationDto) {
+  findAll(@Param() paginationDto: PaginationDto) {
     return this.planetsService.findAll(paginationDto);
   }
 

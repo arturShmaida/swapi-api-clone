@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
   ValidationPipe,
-  Query,
 } from '@nestjs/common';
 import { VehiclesService } from './vehicles.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
@@ -33,7 +32,7 @@ export class VehiclesController {
 
   @Get()
   @Roles([ROLE_ADMIN, ROLE_USER])
-  async findAll(@Query() paginationDto: PaginationDto) {
+  async findAll(@Param() paginationDto: PaginationDto) {
     return this.vehiclesService.findAll(paginationDto);
   }
 

@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { StarshipsService } from './starships.service';
@@ -33,7 +32,7 @@ export class StarshipsController {
 
   @Get()
   @Roles([ROLE_ADMIN, ROLE_USER])
-  async findAll(@Query() paginationDto: PaginationDto) {
+  async findAll(@Param() paginationDto: PaginationDto) {
     return this.starshipsService.findAll(paginationDto);
   }
 

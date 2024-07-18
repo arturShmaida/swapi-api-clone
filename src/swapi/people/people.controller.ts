@@ -3,9 +3,9 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
-  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { PeopleService } from './people.service';
@@ -32,20 +32,20 @@ export default class PeopleController {
 
   @Get()
   @Roles([ROLE_ADMIN, ROLE_USER])
-  async findAll(@Query() paginationDto: PaginationDto) {
+  async findAll(@Param() paginationDto: PaginationDto) {
     return this.peopleService.findAll(paginationDto);
   }
 
   @Get(':id')
   @Roles([ROLE_ADMIN, ROLE_USER])
-  async findOne(@Query('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.peopleService.findOne(+id);
   }
 
   @Put(':id')
   @Roles([ROLE_ADMIN])
   async update(
-    @Query('id') id: string,
+    @Param('id') id: string,
     @Body(ValidationPipe) updatePeopleDto: UpdatePeopleDto,
   ) {
     return this.peopleService.update(+id, updatePeopleDto);
@@ -53,7 +53,7 @@ export default class PeopleController {
 
   @Delete(':id')
   @Roles([ROLE_ADMIN])
-  async remove(@Query('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.peopleService.remove(+id);
   }
 }
