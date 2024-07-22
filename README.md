@@ -1,6 +1,6 @@
 ## Description
 
-This is an REST API I build on [Nest.js](https://github.com/nestjs/nest) framework hat scrapes data from SWAPI (swapi.dev) to database and serves it. It has CRUD functionalities, file uploading feature, storing files on AWS s3 storage, as well as some basic authorization with  passport-local
+This is an REST API I build on [Nest.js](https://github.com/nestjs/nest) framework that scrapes data from SWAPI (swapi.dev) to database and serves it. It has CRUD functionalities, file uploading feature, storing files on AWS s3 storage, as well as some basic authentication with JWT tokens.
 
 ## Installation
 
